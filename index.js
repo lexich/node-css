@@ -42,11 +42,12 @@ CSS.prototype.statement = function(selector, params, options){
     var indent = this.options(options, "indent");
     options = extend({ indent: indent + indent }, options);
   }
-  statement = "" + selector + " {\n" + this.body(params, options) + "}\n";
+  statement = "" + selector + "{\n" + this.body(params, options) + "}\n";
   if(media){
     statement += "}\n";
   }
   return statement;
 };
-
+module.exports = new CSS();
+module.exports.extend = extend;
 module.exports.CSS = CSS;
