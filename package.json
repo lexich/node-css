@@ -1,7 +1,7 @@
 {
   "name": "node-css",
   "version": "0.0.1",
-  "description": "",
+  "description": "simple css generator for node",
   "main": "index.js",
   "repository": "lexich/node-css",
   "scripts": {
