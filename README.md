@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/lexich/node-css.svg)](https://travis-ci.org/lexich/node-css)
 node-css
 ========
 
