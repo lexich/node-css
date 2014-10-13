@@ -48,6 +48,9 @@ CSS.prototype.statement = function(selector, params, options){
   }
   return statement;
 };
-module.exports = new CSS();
+var defaultCSS;
+module.exports = function(selector, params, options){
+  (defaultCSS || (defaultCSS = new CSS())).statement(selector, params, options);
+};
 module.exports.extend = extend;
 module.exports.CSS = CSS;

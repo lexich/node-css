@@ -33,24 +33,25 @@ describe("test extend", function(){
 });
 
 describe("test CSS", function(){
+  var c = new css.CSS();
   it("test default _options", function(){
-    css._options.should.eql({indent: "  "});
+    c._options.should.eql({indent: "  "});
   });
   it("test options method", function(){
-    css.options(null, "indent").should.eql("  ");
-    css.options(null, "indent", "*").should.eql("  ");
-    css.options({indent:"*"}, "indent").should.eql("*");
-    css.options({indent:"*"}, "indent", "$").should.eql("*");
-    css.options(null, "test", "hello").should.eql("hello");
+    c.options(null, "indent").should.eql("  ");
+    c.options(null, "indent", "*").should.eql("  ");
+    c.options({indent:"*"}, "indent").should.eql("*");
+    c.options({indent:"*"}, "indent", "$").should.eql("*");
+    c.options(null, "test", "hello").should.eql("hello");
   });
   it("test body method", function(){
-    var res = css.body({
+    var res = c.body({
       color: "red",
       display: "block",
       "margin-left": "10px"
     });
     res.should.eql("  color: red;\n  display: block;\n  margin-left: 10px;\n");
-    var res1 = css.body({
+    var res1 = c.body({
       color: "red",
       display: "block",
       "margin-left": "10px"
@@ -58,7 +59,7 @@ describe("test CSS", function(){
     res1.should.eql("\tcolor: red;\n\tdisplay: block;\n\tmargin-left: 10px;\n");
   });
   it("test statement method", function(){
-    var res = css.statement(".test", {color: "red", display: "block"});
+    var res = c.statement(".test", {color: "red", display: "block"});
     res.should.eql(".test{\n  color: red;\n  display: block;\n}\n");
   });
 });
