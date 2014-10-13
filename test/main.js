@@ -63,3 +63,10 @@ describe("test CSS", function(){
     res.should.eql(".test{\n  color: red;\n  display: block;\n}\n");
   });
 });
+
+describe("test defauult api", function(){
+  it("test default api with media query", function(){
+    var res = css(".test", {color: "red", display: "block"}, {media: "(min-width: 100px)"});
+    res.should.eql("@media (min-width: 100px){\n  .test{\n    color: red;\n    display: block;\n  }\n}\n");
+  });
+});

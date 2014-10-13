@@ -37,20 +37,22 @@ CSS.prototype.body = function(params, options){
 CSS.prototype.statement = function(selector, params, options){
   var media = this.options(options, "media");
   var statement = "";
+  var indent = this.options(options, "indent");
   if(media){
-    statement += "@media " + media + " {\n";
-    var indent = this.options(options, "indent");
+    statement += "@media " + media + "{\n" + indent;
     options = extend({ indent: indent + indent }, options);
   }
-  statement = "" + selector + "{\n" + this.body(params, options) + "}\n";
+  statement += "" + selector + "{\n" + this.body(params, options);
   if(media){
+    statement += indent + "}\n}\n";
+  } else {
     statement += "}\n";
   }
   return statement;
 };
 var defaultCSS;
 module.exports = function(selector, params, options){
-  (defaultCSS || (defaultCSS = new CSS())).statement(selector, params, options);
+  return (defaultCSS || (defaultCSS = new CSS())).statement(selector, params, options);
 };
 module.exports.extend = extend;
 module.exports.CSS = CSS;
