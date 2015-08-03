@@ -11,7 +11,7 @@ console.log(result);
 ```
 Output
 ```sh
-.test{
+.test {
   color: red;
   display: block;
 }
