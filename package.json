@@ -3,10 +3,15 @@
   "version": "0.0.2",
   "description": "simple css generator for node",
   "main": "index.js",
-  "repository": "lexich/node-css",
+  "repository": "http://github.com/lexich/node-css",
   "scripts": {
-    "test": "istanbul test _mocha --report html -- test/*.js --reporter spec",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "test": "npm run jscs && npm run eslint && istanbul test _mocha --report html -- test/*.js --reporter spec",
+    "coveralls": "npm run jscs && npm run eslint && istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "jscs": "node_modules/.bin/jscs ./*.js test",
+    "eslint": "node_modules/.bin/eslint ./*.js test",
+    "precommit": "npm test",
+    "prepush": "npm test",
+    "postmerge": "npm install"
   },
   "keywords": [
     "css",
@@ -19,13 +24,18 @@
     "url": "https://github.com/lexich"
   },
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "coveralls": "*",
+    "babel-eslint": "^4.0.5",
+    "chai": "^3.0.0",
+    "coveralls": "^2.11.2",
+    "eslint": "^1.0.0",
+    "eslint-config-airbnb": "0.0.7",
+    "eslint-plugin-react": "^3.1.0",
+    "husky": "^0.9.1",
     "istanbul": "*",
-    "mocha": "*",
-    "mocha-lcov-reporter": "*",
-    "should": "~2.1.0"
+    "jscs": "^2.0.0",
+    "mocha": "^2.2.4",
+    "mocha-lcov-reporter": "0.0.2"
   }
 }
