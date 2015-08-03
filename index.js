@@ -1,11 +1,11 @@
 "use strict";
 
-function extend(options){
+function extend(/* args */) {
   var opts = arguments[0];
   var params;
-  for(var i = 1; i < arguments.length; i++){
-    if(params = arguments[i]){
-      for(var key in params){
+  for (var i = 1; i < arguments.length; i++) {
+    if (params = arguments[i]) {
+      for (var key in params) {
         opts[key] = params[key];
       }
     }
@@ -13,37 +13,33 @@ function extend(options){
   return opts;
 }
 
-
-function CSS(){
-  this._options = {
-    indent: "  "
-  };
+function CSS() {
+  this._options = { indent: "  " };
 }
 
-CSS.prototype.options = function(options, name, defval){
+CSS.prototype.options = function(options, name, defval) {
   return (!!options && options[name]) || this._options[name] || defval;
 };
 
-CSS.prototype.body = function(params, options){
+CSS.prototype.body = function(params, options) {
   var body = "";
   var indent = this.options(options, "indent", "  ");
-  for(var name in params){
-    var value = params[name];
+  for (var name in params) {
     body += indent + name + ": " + params[name] + ";\n";
   }
   return body;
 };
 
-CSS.prototype.statement = function(selector, params, options){
+CSS.prototype.statement = function(selector, params, options) {
   var media = this.options(options, "media");
   var statement = "";
   var indent = this.options(options, "indent");
-  if(media){
-    statement += "@media " + media + "{\n" + indent;
+  if (media) {
+    statement += "@media " + media + " {\n" + indent;
     options = extend({ indent: indent + indent }, options);
   }
-  statement += "" + selector + "{\n" + this.body(params, options);
-  if(media){
+  statement += "" + selector + " {\n" + this.body(params, options);
+  if (media) {
     statement += indent + "}\n}\n";
   } else {
     statement += "}\n";
@@ -51,7 +47,7 @@ CSS.prototype.statement = function(selector, params, options){
   return statement;
 };
 var defaultCSS;
-module.exports = function(selector, params, options){
+module.exports = function(selector, params, options) {
   return (defaultCSS || (defaultCSS = new CSS())).statement(selector, params, options);
 };
 module.exports.extend = extend;
